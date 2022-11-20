@@ -15,6 +15,7 @@ namespace ControlContacts
             builder.Services.AddEntityFrameworkSqlServer()
                 .AddDbContext<DataBaseContext>(o=>o.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 

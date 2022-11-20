@@ -11,5 +11,6 @@ namespace ControlContacts.Data
         }
 
         public DbSet<ContactModel> Contacts { get; set; }
+        public DbSet<UserModel> User { get; set; }
     }
 }

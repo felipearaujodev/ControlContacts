@@ -15,7 +15,7 @@ namespace ControlContacts.Controllers
 
         public IActionResult Index()
         {
-            var contacts = _respositoryContact.GetAll();
+            var contacts = _respositoryContact.GetAll().OrderByDescending(c=>c.Id);
 
             return View(contacts);
         }

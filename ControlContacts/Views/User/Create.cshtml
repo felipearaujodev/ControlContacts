@@ -1,0 +1,47 @@
+﻿@using ControlContacts.Enums
+@model UserModel
+
+@{
+    ViewData["Title"] = "Criar usuário";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cadastrar usuário</h1>
+</div>
+
+<form class="row g-2 needs-validation" novalidate asp-controller="User" asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" asp-for="Name" class="form-control" placeholder="Nome do usuário" required>
+        @Html.ValidationMessageFor(x=>x.Name)
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="text" asp-for="Email" class="form-control" placeholder="E-mail do usuário" required>
+        @Html.ValidationMessageFor(x=>x.Email)
+    </div>
+    <div class="form-group">
+        <label for="cell" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" placeholder="Login do usuário" required>
+        @Html.ValidationMessageFor(x=>x.Login)
+    </div>
+
+    <div class="form-group">
+        <label for="cell" class="form-label">Senha</label>
+        <input type="password" asp-for="Password" class="form-control" placeholder="Senha do usuário" required>
+        @Html.ValidationMessageFor(x=>x.Password)
+    </div>
+
+    <div class="form-group">
+        <label for="cell" class="form-label">Perfil</label>
+        <select class="form-control">
+            <option value="0">Selecione</option>
+            <option value="@ProfileEnum.Admin">Administrador</option>
+            <option value="@ProfileEnum.Pattern">Padrão</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit">Adicionar</button>
+    <a class="btn btn-secondary btn-block" asp-controller="User" asp-action="Index" roler="button">Voltar</a>
+
+</form>
