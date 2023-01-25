@@ -19,5 +19,10 @@ namespace ControlContacts.Models
         public ProfileEnum? Profile { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
+
+        public bool PasswordIsValid(string password) 
+        { 
+            return Password == password;
+        }
     }
 }

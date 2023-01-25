@@ -33,6 +33,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Login</th>
+                <th scope="col">Perfil</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Data de Cadastro</th>
                 <th scope="col"></th>
@@ -46,6 +47,7 @@
                         <th scope="row">@user.Id</th>
                         <td>@user.Name</td>
                         <td>@user.Login</td>
+                        <td>@(user.Profile == ControlContacts.Enums.ProfileEnum.Admin ? "Administrador" : "Padrão")</td>
                         <td>@user.Email</td>
                         <td>@user.RegistrationDate</td>
                         <td>

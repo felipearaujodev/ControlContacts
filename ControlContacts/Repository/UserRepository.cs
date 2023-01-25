@@ -42,6 +42,11 @@ namespace ControlContacts.Repository
             return _dataBaseContext.User.ToList();
         }
 
+        public UserModel GetLogin(string login)
+        {
+            return _dataBaseContext.User.FirstOrDefault(l => l.Login.ToUpper() == login.ToUpper());
+        }
+
         public UserModel Update(UserModel user)
         {
             var userDB = Get(user.Id);
@@ -49,7 +54,6 @@ namespace ControlContacts.Repository
 
             userDB.Name = user.Name;
             userDB.Login = user.Login;
-            userDB.Password = user.Password;
             userDB.Email = user.Email;
             userDB.UpdateDate = user.UpdateDate;
             userDB.Profile = user.Profile;
