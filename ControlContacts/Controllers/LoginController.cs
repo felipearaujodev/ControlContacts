@@ -1,4 +1,5 @@
-﻿using ControlContacts.Models;
+﻿
+using ControlContacts.Models;
 using ControlContacts.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,14 +8,28 @@ namespace ControlContacts.Controllers
     public class LoginController : Controller
     {
         private readonly IUserRepository _userRepository;
-        public LoginController(IUserRepository userRepository)
+        private readonly Helpers.ISession _iSession;
+        public LoginController(IUserRepository userRepository, Helpers.ISession iSession)
         {
             _userRepository = userRepository;
+            _iSession = iSession;
         }
 
         public IActionResult Index()
         {
+            //se o usuário estiver logado, redirecionar para home
+            if(_iSession.GetUserSession() != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
+        }
+
+        public IActionResult Logoff()
+        {
+            _iSession.RemoveUserSession();
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -29,6 +44,7 @@ namespace ControlContacts.Controllers
                     {
                         if (user.PasswordIsValid(loginModel.Password))
                         {
+                            _iSession.CreateUserSession(user);
                             return RedirectToAction("Index", "Home");
                         }
                     }
@@ -38,7 +54,7 @@ namespace ControlContacts.Controllers
             }
             catch (Exception ex)
             {
-                TempData["MensagemErro"] = "Não fi possível realizar o login, verifique se o login e senha estão corretos!";
+                TempData["MensagemErro"] = "Não foi possível realizar o login, verifique se o login e senha estão corretos!";
                 return RedirectToAction("Index");
                 throw;
             }
